@@ -5,9 +5,5 @@ package com.fc.init;
  */
 public class FCont {
 
-    /**
-     * 聊天服务器地址
-     */
-    public static String CHAT_ADDR = "";
-
+    public static String CHAR_URL;
 }

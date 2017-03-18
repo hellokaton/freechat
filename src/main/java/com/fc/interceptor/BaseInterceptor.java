@@ -18,7 +18,7 @@ public class BaseInterceptor implements Interceptor {
     public boolean before(Request request, Response response) {
 
         LOGGER.info("request: {}, ip: {}", request.uri(), request.address());
-        request.attribute("chat_addr", FCont.CHAT_ADDR);
+        request.attribute("chat_addr", FCont.CHAR_URL);
 
         return true;
     }

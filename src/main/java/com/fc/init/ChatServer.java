@@ -129,19 +129,6 @@ public class ChatServer {
         server.start();
     }
 
-    private String cookie(String name, String cookies) {
-        if (null != cookies && null != name) {
-            String[] cooks = StringKit.split(cookies, ";");
-            for (String cook : cooks) {
-                String[] val = StringKit.split(cook, "=");
-                if (name.equals(val[0].trim())) {
-                    return val[1];
-                }
-            }
-        }
-        return null;
-    }
-
     public static void stop() {
         if (null != server) {
             server.stop();

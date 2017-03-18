@@ -21,9 +21,8 @@ public class WebStart implements WebContextListener {
         ViewSettings.$().templateEngine(new JetbrickTemplateEngine());
 
         Config config = bConfig.config();
-        String address = config.get("chat.addr", "127.0.0.1:10029");
-        FCont.CHAT_ADDR = StringKit.split(address)[0];
-        ChatServer chatServer = new ChatServer(address);
+        FCont.CHAR_URL = config.get("chat-server-url", "127.0.0.1:10029");
+        ChatServer chatServer = new ChatServer("127.0.0.1:10029");
         chatServer.start();
     }
 }
