@@ -135,4 +135,9 @@ public class ChatServer {
         }
     }
 
+    public static void startup(){
+        if(null != server){
+            server.start();
+        }
+    }
 }

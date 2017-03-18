@@ -22,6 +22,9 @@ public class WebStart implements WebContextListener {
 
         Config config = bConfig.config();
         FCont.CHAR_URL = config.get("chat-server-url", "127.0.0.1:10029");
+        FCont.VERSION = config.get("app.version", "0.0.1");
+        FCont.ADM_PWD = config.get("admin.pwd", "hello.world");
+
         ChatServer chatServer = new ChatServer("127.0.0.1:10029");
         chatServer.start();
     }

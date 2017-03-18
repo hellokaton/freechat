@@ -16,10 +16,9 @@ public class BaseInterceptor implements Interceptor {
 
     @Override
     public boolean before(Request request, Response response) {
-
         LOGGER.info("request: {}, ip: {}", request.uri(), request.address());
         request.attribute("chat_addr", FCont.CHAR_URL);
-
+        request.attribute("version", FCont.VERSION);
         return true;
     }
 

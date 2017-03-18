@@ -52,7 +52,9 @@ function send_msg() {
         socket.json.send(sendObj);
         var html = '<p class="mdui-m-b-3"><span class="chat-box-pink">我 : '+ msg +'</span></p>';
         $('.mdui-dialog-content .chat-body').append(html);
+        $('.mdui-dialog-content .chat-body').scrollTop($('.mdui-dialog-content .chat-body').height());
         $('#chat_msg').val('');
+        $('#chat_msg').focus();
     }
 }
 
@@ -81,6 +83,7 @@ $(document).ready(function () {
             var html = '<p class="mdui-m-b-3"><span class="chat-box-green">'+ nick_name +' : '+ msg +'</span></p>';
             to_id = data.id;
             $('.mdui-dialog-content .chat-body').append(html);
+            $('.mdui-dialog-content .chat-body').scrollTop($('.mdui-dialog-content .chat-body').height());
         });
 
         // 自己上线
@@ -101,6 +104,7 @@ $(document).ready(function () {
                 console.log('用户'+ data.user.id +'/'+ data.user.nick_name+'下线了');
                 var html = '<p class="mdui-m-b-3"><span class="chat-box-info">提示: '+ data.user.nick_name+'下线了' +'</span></p>';
                 $('.mdui-dialog-content .chat-body').append(html);
+                $('.mdui-dialog-content .chat-body').scrollTop($('.mdui-dialog-content .chat-body').height());
             }
             // 更新当前在线用户数
             $('#current_users').text(data.users || 0);
@@ -112,6 +116,7 @@ $(document).ready(function () {
             $('#chat_msg').attr('disabled', false);
             $('.mdui-dialog-content .chat-body').html('<p class="mdui-m-b-3"><span class="chat-box-info">为您匹配到了好友：'+ data.nick_name +'</span></p>');
             window.clearInterval(t_wait);
+            $('.mdui-dialog-content .chat-body').scrollTop($('.mdui-dialog-content .chat-body').height());
         });
     }
 

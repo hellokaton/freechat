@@ -108,7 +108,7 @@
     </profiles>
 
     <build>
-        <finalName>tale</finalName>
+        <finalName>freechat</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
