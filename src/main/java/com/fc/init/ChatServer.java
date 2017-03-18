@@ -11,7 +11,10 @@ import com.fc.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * Created by biezhi on 2017/1/18.
@@ -35,18 +38,18 @@ public class ChatServer {
     private String host;
     private int port;
 
-    public ChatServer(String address){
+    public ChatServer(String address) {
         this.host = StringKit.split(address, ":")[0];
         this.port = Integer.valueOf(StringKit.split(address, ":")[1]);
     }
 
-    private void initConfig(){
+    private void initConfig() {
         config = new com.corundumstudio.socketio.Configuration();
         config.setHostname(host);
         config.setPort(port);
     }
 
-    public void start(){
+    public void start() {
         this.initConfig();
 
         server = new SocketIOServer(config);
@@ -59,11 +62,11 @@ public class ChatServer {
             LOGGER.info("request msg :" + JSONKit.toJSONString(message));
             try {
                 String to_id = message.getTo_id();
-                if(StringKit.isNotBlank(to_id)){
+                if (StringKit.isNotBlank(to_id)) {
                     User toUser = users.get(to_id);
                     chat1namespace.getClient(toUser.getUuid()).sendEvent("receiveMsg", message);
                 }
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
@@ -92,7 +95,7 @@ public class ChatServer {
             User user = users.get(id);
             users.remove(id);
             unmatchuser.remove(id);
-            if(null != user){
+            if (null != user) {
                 OnlineState onlineState = new OnlineState(user, "offline", users.size());
                 // 通知好友
                 chat1namespace.getBroadcastOperations().sendEvent("changeOnline", onlineState);
@@ -101,13 +104,13 @@ public class ChatServer {
 
         // 匹配一个好友
         chat1namespace.addEventListener("matach_friend", String.class, ((client, data, ackSender) -> {
-            if(unmatchuser.size() > 1){
-                User mine,friend;
-                while (true){
+            if (unmatchuser.size() > 1) {
+                User mine, friend;
+                while (true) {
                     String id = client.getSessionId().toString();
                     int pos = random.nextInt(unmatchuser.size());
                     String fid = unmatchuser.get(pos);
-                    if(id.equals(fid)){
+                    if (id.equals(fid)) {
                         continue;
                     }
                     mine = users.get(id);
@@ -116,7 +119,7 @@ public class ChatServer {
                     unmatchuser.remove(fid);
                     break;
                 }
-                if(null != mine && null != friend){
+                if (null != mine && null != friend) {
                     chat1namespace.getClient(client.getSessionId()).sendEvent("matched", friend);
                     chat1namespace.getClient(friend.getUuid()).sendEvent("matched", mine);
                 }
@@ -126,12 +129,12 @@ public class ChatServer {
         server.start();
     }
 
-    private String cookie(String name, String cookies){
-        if(null != cookies && null != name){
+    private String cookie(String name, String cookies) {
+        if (null != cookies && null != name) {
             String[] cooks = StringKit.split(cookies, ";");
-            for(String cook : cooks){
+            for (String cook : cooks) {
                 String[] val = StringKit.split(cook, "=");
-                if(name.equals(val[0].trim())){
+                if (name.equals(val[0].trim())) {
                     return val[1];
                 }
             }
@@ -139,8 +142,8 @@ public class ChatServer {
         return null;
     }
 
-    public static void stop(){
-        if(null != server){
+    public static void stop() {
+        if (null != server) {
             server.stop();
         }
     }

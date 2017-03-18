@@ -11,7 +11,7 @@ import com.fc.init.ChatServer;
 public class IndexController {
 
     @Route(values = "/")
-    public String index(){
+    public String index() {
         return "index.html";
     }
 
@@ -19,7 +19,7 @@ public class IndexController {
      * 关闭聊天服务
      */
     @Route(values = "shutdown")
-    public void shutdown(){
+    public void shutdown() {
         ChatServer.stop();
     }
 
