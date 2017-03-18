@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Free Chat | 实时匿名聊天系统</title>
+    <link rel="shortcut icon" href="/static/img/favicon.png"/>
+    <link rel="stylesheet" href="/static/css/mdui.min.css"/>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+    <style>
+        #background-img {
+            background: url('/static/img/home_bg.png') no-repeat top;
+            background-size: cover;
+        }
+    </style>
+</head>
+<body>
+
+<div class="mdui-appbar mdui-shadow-0">
+    <div class="mdui-toolbar mdui-text-color-white">
+        <a href="javascript:;" class="mdui-typo-title">Free Chat</a>
+        <div class="mdui-toolbar-spacer"></div>
+        <p class="mdui-p-a-1">当前在线：<span id="current_users">0</span>人</p>
+    </div>
+</div>
+
+<div id="background-img"></div>
+
+<div id="intro" class="mdui-container-fluid">
+    <div class="title mdui-p-b-2">
+        <span class="mdui-text-color-pink-accent">F</span>ree
+        <span class="mdui-text-color-pink-accent">C</span>hat
+    </div>
+
+    <div class="description mdui-typo">
+        <p>实时匿名的在线聊天网站。</p>
+        <p class="mdui-hidden-sm-down">安全、快速、响应式</p>
+    </div>
+
+    <div class="mdui-textfield" style="width: 220px; margin: 0 auto;">
+        <input id="nick_name" class="mdui-textfield-input" type="text" placeholder="请输入你的昵称"/>
+    </div>
+
+    <button class="mdui-btn mdui-btn-raised mdui-color-pink-accent mdui-ripple mdui-m-a-2"
+            onclick="show_signle_dialog()"><i class="mdui-icon material-icons">&#xe420;</i> 开始聊天
+    </button>
+
+    <p>当前版本：v0.1.2</p>
+
+    <div id="footer" class="mdui-container mdui-typo mdui-text-center">
+        <p class="mdui-typo-body-1">
+            2017@ <a class="mdui-text-color-blue" href="https://github.com/biezhi">王爵nice</a> MIT license
+        </p>
+        <p class="mdui-typo-caption">
+            友情链接：<a href="https://github.com/biezhi/blade" target="_blank">Blade</a>
+        </p>
+    </div>
+
+</div>
+
+<div id="single-chat" class="mdui-dialog">
+    <div class="mdui-dialog-title">
+        <div class="mdui-col-xs-12">
+
+            <div class="mdui-col-xs-6 mdui-text-left">开始聊天</div>
+            <div class="mdui-col-xs-6 mdui-text-right">
+                <button onclick="close_dialog()" class="mdui-btn mdui-btn-icon mdui-color-theme-accent mdui-ripple"
+                        mdui-dialog-close><i class="mdui-icon material-icons">&#xe14c;</i></button>
+            </div>
+        </div>
+        <div class="mdui-clearfix"></div>
+    </div>
+    <div class="mdui-dialog-content">
+        <div class="chat-body">
+            <p class="mdui-m-b-3"><span class="chat-box-info">系统正在为您匹配好友...</span></p>
+        </div>
+        <div class="chat-footer">
+            <div class="mdui-col-xs-8 mdui-col-md-10">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">输入聊天消息</label>
+                    <textarea id="chat_msg" class="mdui-textfield-input" maxlength="32"></textarea>
+                </div>
+            </div>
+            <div class="mdui-col-xs-4 mdui-col-md-2 mdui-p-a-4">
+                <button onclick="send_msg()" class="mdui-fab mdui-color-pink-accent mdui-ripple"><i
+                        class="mdui-icon material-icons">&#xe163;</i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="chat_addr" value="${chat_addr}" />
+<script type="text/javascript" src="/static/js/mdui.min.js"></script>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="//cdn.bootcss.com/socket.io/1.7.3/socket.io.min.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.17.1/moment.min.js"></script>
+<script src="//cdn.bootcss.com/moment.js/2.17.1/locale/zh-cn.js"></script>
+<script type="text/javascript" src="/static/js/app.js"></script>
+
+</body>
+</html>

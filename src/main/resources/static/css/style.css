@@ -1,0 +1,107 @@
+#background-img {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  z-index: -1;
+}
+
+#intro {
+  text-align: center;
+  color: #fff;
+  padding-top: 80px;
+}
+
+#intro .title {
+  font-size: 26px;
+}
+#intro .description {
+  font-size: 14px;
+}
+
+#footer {
+  margin-top: 140px;
+}
+
+@media (min-width: 600px) {
+  #intro {
+    padding-top: 120px;
+  }
+  #intro .title {
+    font-size: 30px;
+  }
+  #intro .description {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #intro {
+    padding-top: 160px;
+  }
+  #intro .title {
+    font-size: 38px;
+  }
+  #intro .description {
+    font-size: 20px;
+  }
+}
+@media (min-width: 1440px) {
+  #intro .title {
+    font-size: 45px;
+  }
+  #intro .description {
+    font-size: 20px;
+  }
+}
+
+.mdui-dialog>.mdui-dialog-title{
+    padding: 10px 0 0;
+    line-height: 40px;
+}
+.mdui-dialog-content{
+  height: 500px;
+  padding:0;
+  overflow: hidden;
+}
+
+.chat-body{
+  height: 340px;
+  padding-top: 10px;
+  padding-left: 24px;
+  padding-right: 24px;
+  
+  background: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.6);
+  background-image: url(../img/bg/2.png);
+  background-size: cover;
+}
+
+.chat-body p{
+  opacity:0.9;
+  color: #000;
+}
+.chat-footer{
+}
+
+/*绿色聊天框背景*/
+.chat-box-green{
+  background-color: #d8f1df;
+  padding: 10px;
+  border-radius: 5px;
+}
+/*红色聊天框背景*/
+.chat-box-pink{
+  background-color: #fbaac5;
+  padding: 10px;
+  border-radius: 5px;
+}
+/*提示框背景*/
+.chat-box-info{
+  background-color: #fbda60;
+  padding: 10px;
+  border-radius: 5px;
+}
