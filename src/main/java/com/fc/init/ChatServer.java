@@ -126,6 +126,13 @@ public class ChatServer {
             }
         }));
 
+        Runtime.getRuntime().addShutdownHook(new Thread(){
+            @Override
+            public void run() {
+                server.stop();
+            }
+        });
+
         server.start();
     }
 
