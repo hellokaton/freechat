@@ -1,31 +1,28 @@
 package com.fc.init;
 
-import com.blade.config.BConfig;
-import com.blade.context.WebContextListener;
-import com.blade.kit.StringKit;
-import com.blade.kit.base.Config;
-import com.blade.mvc.view.ViewSettings;
-import com.blade.mvc.view.template.JetbrickTemplateEngine;
-
-import javax.servlet.ServletContext;
+import com.blade.Blade;
+import com.blade.Environment;
+import com.blade.event.BeanProcessor;
+import com.blade.ioc.annotation.Bean;
 
 /**
  * Created by biezhi on 2017/3/18.
  */
-public class WebStart implements WebContextListener {
+@Bean
+public class WebStart implements BeanProcessor {
 
     @Override
-    public void init(BConfig bConfig, ServletContext sec) {
+    public void processor(Blade blade) {
 
-        // 注册模板引擎
-        ViewSettings.$().templateEngine(new JetbrickTemplateEngine());
+        Environment environment = blade.environment();
+        FCont.CHAR_URL = environment.get("chat-server-url", "127.0.0.1:10029");
+        FCont.VERSION = environment.get("app.version", "0.0.1");
+        FCont.ADM_PWD = environment.get("admin.pwd", "hello.world");
 
-        Config config = bConfig.config();
-        FCont.CHAR_URL = config.get("chat-server-url", "127.0.0.1:10029");
-        FCont.VERSION = config.get("app.version", "0.0.1");
-        FCont.ADM_PWD = config.get("admin.pwd", "hello.world");
-
-        ChatServer chatServer = new ChatServer("127.0.0.1:10029");
+        ChatServer chatServer = new ChatServer(FCont.CHAR_URL);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            ChatServer.stop();
+        }));
         chatServer.start();
     }
 }
